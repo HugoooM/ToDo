@@ -21,8 +21,10 @@ new Vue({
           status: this.newTask.status,
           priority: this.newTask.priority,
         };
-      
         this.tasks.push(newTask);
+
+        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+
         this.newTask.description = '';
         this.newTask.startDate = '';
         this.newTask.endDate = '';
