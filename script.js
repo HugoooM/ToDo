@@ -33,7 +33,7 @@ new Vue({
         message.style.display = 'block';
         setTimeout(function() {
           message.style.display = 'none';
-        }, 500);
+        }, 3500);
       },
       removeTask: function(index) {
         // Suppression de la tâche correspondante
