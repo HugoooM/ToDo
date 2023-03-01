@@ -10,6 +10,7 @@ new Vue({
             status: 'à faire',
             priority: 'basse',
         },
+        showData: false
     },
     created() {
         const savedtask = localStorage.getItem('tasks');

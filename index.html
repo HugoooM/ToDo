@@ -1,96 +1,101 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div id="message" class="alert alert-success" style="display:none;">
         Tâche ajoutée avec succès!
-      </div>
-      
-	<title>ToDo List</title>
+    </div>
+
+    <title>ToDo List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 </head>
 <body>
-    <div id="app">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="text-center mt-5">Ma ToDo List</h1>
-                </div>
+<div id="app">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mt-5">Ma ToDo List</h1>
             </div>
-            <!-- Formulaire d'ajout de tâches -->
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-4">
-                    <form @submit.prevent="addTask">
-                        <div class="form-group">
-                          <label for="description">Description :</label>
-                          <input type="text" class="form-control" id="description" v-model="newTask.description" required>
+        </div>
+        <!-- Liste des tâches -->
+        <div class="col-12 col-sm-6 col-md-8">
+            <h2>Liste des tâches</h2>
+            <ul class="list-group" id="tasks-list" v-if="tasks.length > 0">
+                <li class="list-group-item" v-for="(task, index) in tasks" :key="index">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5>{{ task.description }}</h5>
+                            <p>
+                                Du {{ task.startDate }} au {{ task.endDate }}
+                            </p>
+                            <p>
+                                État : {{ task.status }} / Priorité : {{ task.priority }}
+                            </p>
                         </div>
-                        <div class="form-group">
-                          <label for="start-date">Date de début :</label>
-                          <input type="date" class="form-control" id="start-date" v-model="newTask.startDate" required>
+                        <div>
+                            <button class="btn btn-danger" @click="removeTask(index)">Supprimer</button>
                         </div>
-                        <div class="form-group">
-                          <label for="end-date">Date de fin :</label>
-                          <input type="date" class="form-control" id="end-date" v-model="newTask.endDate" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="status">Statut :</label>
-                          <select class="form-control" id="status" v-model="newTask.status" required>
+                    </div>
+                </li>
+            </ul>
+            <p v-else>Aucune tâche pour le moment.</p>
+        </div>
+
+        <button class="btn btn-primary" :value="buttonAfficherForm" @click="showData = !showData">
+            Ajouter une tâche
+        </button>
+
+        <!-- Formulaire d'ajout de tâches -->
+        <div class="row" v-if="showData">
+            <div class="col-12 col-sm-6 col-md-4">
+                <form @submit.prevent="addTask">
+                    <div class="form-group">
+                        <label for="description">Description :</label>
+                        <input type="text" class="form-control" id="description" v-model="newTask.description" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-date">Date de début :</label>
+                        <input type="date" class="form-control" id="start-date" v-model="newTask.startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-date">Date de fin :</label>
+                        <input type="date" class="form-control" id="end-date" v-model="newTask.endDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Statut :</label>
+                        <select class="form-control" id="status" v-model="newTask.status" required>
                             <option value="">Choisir un statut</option>
                             <option value="à faire">À faire</option>
                             <option value="en cours">En cours</option>
                             <option value="terminé">Terminé</option>
-                          </select>
-                        </div>
-                        <div class="form-group">
-                          <label for="priority">Priorité :</label>
-                          <select class="form-control" id="priority" v-model="newTask.priority" required>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="priority">Priorité :</label>
+                        <select class="form-control" id="priority" v-model="newTask.priority" required>
                             <option value="">Choisir une priorité</option>
                             <option value="haute">Haute</option>
                             <option value="moyenne">Moyenne</option>
                             <option value="basse">Basse</option>
-                          </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Ajouter</button>
-                      </form>
-                      
-                </div>
-                    <!-- Liste des tâches -->
-                    <div class="col-12 col-sm-6 col-md-8">
-                        <h2>Liste des tâches</h2>
-                        <ul class="list-group" id="tasks-list" v-if="tasks.length > 0">
-                            <li class="list-group-item" v-for="(task, index) in tasks" :key="index">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5>{{ task.description }}</h5>
-                                        <p>
-                                            Du {{ task.startDate }} au {{ task.endDate }}
-                                        </p>
-                                        <p>
-                                            État : {{ task.status }} / Priorité : {{ task.priority }}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-danger" @click="removeTask(index)">Supprimer</button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <p v-else>Aucune tâche pour le moment.</p>
+                        </select>
                     </div>
-        
-        
-                </div>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </form>
+
             </div>
+
+
         </div>
     </div>
-	
-	
-    <!-- Import de Vue.js et de Bootstrap JS -->
+</div>
+</div>
 
-    <script type="text/javascript" src="script.js"></script>
+
+<!-- Import de Vue.js et de Bootstrap JS -->
+
+<script type="text/javascript" src="script.js"></script>
 
 </body>
 </html>
