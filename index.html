@@ -20,7 +20,7 @@
             </div>
         </div>
         <!-- Liste des tâches -->
-        <div class="col-12 col-sm-6 col-md-8">
+        <div class="col-12 text-center">
             <h2>Liste des tâches</h2>
             <ul class="list-group" id="tasks-list" v-if="tasks.length > 0">
                 <li class="list-group-item" v-for="(task, index) in tasks" :key="index">
@@ -43,13 +43,15 @@
             <p v-else>Aucune tâche pour le moment.</p>
         </div>
 
-        <button class="btn btn-primary" :value="buttonAfficherForm" @click="showData = !showData">
-            Ajouter une tâche
-        </button>
+        <div class="col-md-12 text-center">
+            <button class="btn btn-primary mt-5" @click="showData = !showData">
+                Ajouter une tâche
+            </button>
+        </div>
 
         <!-- Formulaire d'ajout de tâches -->
         <div class="row" v-if="showData">
-            <div class="col-12 col-sm-6 col-md-4">
+            <div class="col-12 text-center">
                 <form @submit.prevent="addTask">
                     <div class="form-group">
                         <label for="description">Description :</label>
