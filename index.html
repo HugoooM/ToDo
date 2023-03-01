@@ -20,37 +20,38 @@
                 <div class="col-12 col-sm-6 col-md-4">
                     <form @submit.prevent="addTask">
                         <div class="form-group">
-                            <label for="description">Description :</label>
-                            <input type="text" class="form-control" id="description" v-model="addTask.description" required>
+                          <label for="description">Description :</label>
+                          <input type="text" class="form-control" id="description" v-model="newTask.description" required>
                         </div>
                         <div class="form-group">
-                            <label for="start-date">Date de début :</label>
-                            <input type="date" class="form-control" id="start-date" v-model="addTask.startDate" required>
+                          <label for="start-date">Date de début :</label>
+                          <input type="date" class="form-control" id="start-date" v-model="newTask.startDate" required>
                         </div>
                         <div class="form-group">
-                            <label for="end-date">Date de fin :</label>
-                            <input type="date" class="form-control" id="end-date" v-model="addTask.endDate" required>
+                          <label for="end-date">Date de fin :</label>
+                          <input type="date" class="form-control" id="end-date" v-model="newTask.endDate" required>
                         </div>
                         <div class="form-group">
-                            <label for="status">Statut :</label>
-                            <select class="form-control" id="status" v-model="addTask.status" required>
-                                <option value="">Choisir un statut</option>
-                                <option value="à faire">À faire</option>
-                                <option value="en cours">En cours</option>
-                                <option value="terminé">Terminé</option>
-                            </select>
+                          <label for="status">Statut :</label>
+                          <select class="form-control" id="status" v-model="newTask.status" required>
+                            <option value="">Choisir un statut</option>
+                            <option value="à faire">À faire</option>
+                            <option value="en cours">En cours</option>
+                            <option value="terminé">Terminé</option>
+                          </select>
                         </div>
                         <div class="form-group">
-                            <label for="priority">Priorité :</label>
-                            <select class="form-control" id="priority" v-model="addTask.priority" required>
-                                <option value="">Choisir une priorité</option>
-                                <option value="haute">Haute</option>
-                                <option value="moyenne">Moyenne</option>
-                                <option value="basse">Basse</option>
-                            </select>
+                          <label for="priority">Priorité :</label>
+                          <select class="form-control" id="priority" v-model="newTask.priority" required>
+                            <option value="">Choisir une priorité</option>
+                            <option value="haute">Haute</option>
+                            <option value="moyenne">Moyenne</option>
+                            <option value="basse">Basse</option>
+                          </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Ajouter</button>
-                    </form>
+                      </form>
+                      
                 </div>
                     <!-- Liste des tâches -->
                     <div class="col-12 col-sm-6 col-md-8">

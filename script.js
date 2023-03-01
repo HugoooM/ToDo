@@ -3,28 +3,31 @@ new Vue({
     el: '#app',
     data: {
       tasks: [],
-      description: '',
-      startDate: '',
-      endDate: '',
-      status: 'À faire',
-      priority: 'Basse',
+      newTask: {
+        description: '',
+        startDate: '',
+        endDate: '',
+        status: 'à faire',
+        priority: 'basse',
+      },
     },
+    
     methods: {
       addTask: function() {
         const newTask = {
-          description: this.description,
-          startDate: this.startDate,
-          endDate: this.endDate,
-          status: this.status,
-          priority: this.priority,
+          description: this.newTask.description,
+          startDate: this.newTask.startDate,
+          endDate: this.newTask.endDate,
+          status: this.newTask.status,
+          priority: this.newTask.priority,
         };
-
+      
         this.tasks.push(newTask);
-        this.description = '';
-        this.startDate = '';
-        this.endDate = '';
-        this.status = 'À faire';
-        this.priority = 'Basse';
+        this.newTask.description = '';
+        this.newTask.startDate = '';
+        this.newTask.endDate = '';
+        this.newTask.status = 'à faire';
+        this.newTask.priority = 'basse';      
 
         const message = document.getElementById('message');
         message.style.display = 'block';
