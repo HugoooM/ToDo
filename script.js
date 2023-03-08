@@ -8,7 +8,8 @@ new Vue({
       startDate: "",
       endDate: "",
       status: "à faire",
-      priority: "basse"
+      priority: "basse",
+      color: "blue"
     },
     selectedFilter: "all",
     showData: false
@@ -21,12 +22,22 @@ new Vue({
   },
   methods: {
     addTask: function() {
+      let color;
+      if (this.newTask.priority === "haute") {
+        color = "red";
+      } else if (this.newTask.priority === "moyenne") {
+        color = "orange";
+      } else if (this.newTask.priority === "basse") {
+        color = "blue";
+      }
+
       const newTask = {
         description: this.newTask.description,
         startDate: this.newTask.startDate,
         endDate: this.newTask.endDate,
         status: this.newTask.status,
-        priority: this.newTask.priority
+        priority: this.newTask.priority,
+        color: color
       };
       this.tasks.push(newTask);
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
@@ -35,6 +46,7 @@ new Vue({
       this.newTask.endDate = "";
       this.newTask.status = "à faire";
       this.newTask.priority = "basse";
+      this.newTask.color = "blue";
       const message = document.getElementById("message");
       message.style.display = "block";
       setTimeout(function() {
