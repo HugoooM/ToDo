@@ -13,6 +13,7 @@ new Vue({
     selectedFilter: "all",
     showData: false
   },
+
   created() {
     const savedTasks = localStorage.getItem("tasks");
     if (savedTasks) {
@@ -42,7 +43,6 @@ new Vue({
       }, 3500);
     },
     removeTask: function(index) {
-      // Suppression de la tâche correspondante
       this.tasks.splice(index, 1);
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
@@ -63,7 +63,7 @@ new Vue({
     sortTasksByStatus: function() {
       console.log("sortTasksByStatus");
       this.tasks.sort((a, b) => {
-        const statuses = ["à faire", "en cours", "terminé"];
+        const statuses = ["à faire", "en cours", "terminée"];
         return statuses.indexOf(a.status) - statuses.indexOf(b.status);
       });
     },
